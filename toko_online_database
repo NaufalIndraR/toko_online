@@ -1,0 +1,223 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 28, 2022 at 04:53 AM
+-- Server version: 10.4.20-MariaDB
+-- PHP Version: 8.0.9
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `toko_online`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_barang`
+--
+
+CREATE TABLE `tb_barang` (
+  `id_brg` int(11) NOT NULL,
+  `nama_brg` varchar(120) NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `kategori` varchar(60) NOT NULL,
+  `harga` int(11) NOT NULL,
+  `stok` int(4) NOT NULL,
+  `gambar` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_barang`
+--
+
+INSERT INTO `tb_barang` (`id_brg`, `nama_brg`, `keterangan`, `kategori`, `harga`, `stok`, `gambar`) VALUES
+(1, 'Samsung Galaxy A52', 'Samsung Galaxy A52 5G Series', 'handphone', 4900000, 4, 'samsung.jpg\r\n'),
+(2, 'Poco X3 NFC', 'Poco X3 Series NFC', 'handphone', 3500000, 8, 'pocox3.jpg'),
+(4, 'Asus ROG Zephyrus Duo 15', 'Asus ROG Zephyrus Duo 15 Dual Screen', 'laptop', 53200000, 2, 'rogduo.jpg'),
+(5, 'Playstation 5', 'New Playstation 5', 'konsol', 7500000, 5, 'ps5.jpg'),
+(6, 'Headset HyperX Cloud Alpha', 'Headset HyperX Cloud Alpha Gaming Headset', 'elektronik', 2199000, 13, 'hyperxcloud.jpg'),
+(7, 'Samsung J2 Prime', 'Used Samsung J2 Prime ', 'handphone', 200000, 98, 'samsung j2 prime.jpg'),
+(8, 'Playstation 4', 'Playstation 4 From 2013', 'konsol', 4000000, 18, 'ps4.jpg'),
+(9, 'Televisi samsung', 'Samsung Smart TV', 'televisi', 10900000, 13, 'samsungtv.jpeg'),
+(10, 'oddo', 'oddo', 'Handphone', 20000, 10, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_invoice`
+--
+
+CREATE TABLE `tb_invoice` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(65) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `tgl_pesan` datetime NOT NULL,
+  `batas_bayar` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_invoice`
+--
+
+INSERT INTO `tb_invoice` (`id`, `nama`, `alamat`, `tgl_pesan`, `batas_bayar`) VALUES
+(1, 'koko', 'depok, jawa barat', '2022-04-09 10:26:00', '2022-04-10 10:26:00'),
+(11, '', '', '2022-05-21 11:04:35', '2022-05-22 11:04:35'),
+(12, '', '', '2022-05-28 09:30:14', '2022-05-29 09:30:14'),
+(13, 'komala', '', '2022-05-28 09:31:39', '2022-05-29 09:31:39'),
+(14, 'ujang', '', '2022-05-28 09:35:56', '2022-05-29 09:35:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_pesanan`
+--
+
+CREATE TABLE `tb_pesanan` (
+  `id` int(11) NOT NULL,
+  `id_invoice` int(11) NOT NULL,
+  `id_brg` int(11) NOT NULL,
+  `nama_brg` varchar(50) NOT NULL,
+  `jumlah` int(3) NOT NULL,
+  `harga` int(10) NOT NULL,
+  `pilihan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_pesanan`
+--
+
+INSERT INTO `tb_pesanan` (`id`, `id_invoice`, `id_brg`, `nama_brg`, `jumlah`, `harga`, `pilihan`) VALUES
+(1, 2, 1, 'Handphone', 1, 4900000, ''),
+(2, 4, 1, 'Samsung Galaxy A52', 1, 4900000, ''),
+(3, 4, 2, 'Poco X3 NFC', 1, 3500000, ''),
+(4, 4, 4, 'Asus ROG Zephyrus Duo 15', 1, 53200000, ''),
+(5, 4, 5, 'Playstation 5', 1, 7500000, ''),
+(6, 5, 1, 'Samsung Galaxy A52', 1, 4900000, ''),
+(7, 6, 2, 'Poco X3 NFC', 2, 3500000, ''),
+(8, 7, 1, 'Samsung Galaxy A52', 1, 4900000, ''),
+(9, 8, 1, 'Samsung Galaxy A52', 1, 4900000, ''),
+(10, 8, 2, 'Poco X3 NFC', 1, 3500000, ''),
+(11, 9, 2, 'Poco X3 NFC', 2, 3500000, ''),
+(12, 9, 4, 'Asus ROG Zephyrus Duo 15', 1, 53200000, ''),
+(13, 9, 5, 'Playstation 5', 1, 7500000, ''),
+(14, 9, 6, 'Headset HyperX Cloud Alpha', 1, 2199000, ''),
+(15, 9, 7, 'Samsung J2 Prime', 1, 200000, ''),
+(16, 9, 8, 'Playstation 4', 1, 4000000, ''),
+(17, 9, 9, 'Televisi samsung', 1, 10900000, ''),
+(18, 9, 10, 'oddo', 1, 20000, ''),
+(19, 10, 1, 'Samsung Galaxy A52', 1, 4900000, ''),
+(20, 11, 2, 'Poco X3 NFC', 1, 3500000, ''),
+(21, 11, 1, 'Samsung Galaxy A52', 1, 4900000, ''),
+(22, 12, 1, 'Samsung Galaxy A52', 1, 4900000, ''),
+(23, 12, 2, 'Poco X3 NFC', 1, 3500000, ''),
+(24, 13, 6, 'Headset HyperX Cloud Alpha', 1, 2199000, ''),
+(25, 13, 7, 'Samsung J2 Prime', 1, 200000, ''),
+(26, 13, 8, 'Playstation 4', 1, 4000000, ''),
+(27, 14, 10, 'oddo', 1, 20000, ''),
+(28, 14, 9, 'Televisi samsung', 1, 10900000, '');
+
+--
+-- Triggers `tb_pesanan`
+--
+DELIMITER $$
+CREATE TRIGGER `pesanan_penjualan` AFTER INSERT ON `tb_pesanan` FOR EACH ROW BEGIN
+	UPDATE tb_barang SET stok = stok-NEW.jumlah 
+    WHERE id_brg = NEW.id_brg;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_user`
+--
+
+CREATE TABLE `tb_user` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(75) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `role_id` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_user`
+--
+
+INSERT INTO `tb_user` (`id`, `nama`, `username`, `password`, `role_id`) VALUES
+(1, 'Admin', 'Admin', '12345', 1),
+(2, 'user', 'user', '123', 2),
+(3, 'Budi', 'Budiman', '1234', 2);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `tb_barang`
+--
+ALTER TABLE `tb_barang`
+  ADD PRIMARY KEY (`id_brg`);
+
+--
+-- Indexes for table `tb_invoice`
+--
+ALTER TABLE `tb_invoice`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_pesanan`
+--
+ALTER TABLE `tb_pesanan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tb_user`
+--
+ALTER TABLE `tb_user`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `tb_barang`
+--
+ALTER TABLE `tb_barang`
+  MODIFY `id_brg` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `tb_invoice`
+--
+ALTER TABLE `tb_invoice`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `tb_pesanan`
+--
+ALTER TABLE `tb_pesanan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `tb_user`
+--
+ALTER TABLE `tb_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
