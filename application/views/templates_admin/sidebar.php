@@ -4,7 +4,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -101,7 +101,16 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
-                    
+                        <ul class="na navbar-nav navbar-right">
+                                <?php if($this->session->userdata('username')) { ?>
+                                    <li><div>Selamat Datang <?php echo $this->session->userdata('username') ?></div></li>
+                                    <li class="ml-2"><?php echo anchor('auth/logout', 'Logout') ?></li>
+                                <?php } else { ?>
+                                    <li><?php echo anchor('auth/login', 'Login'); ?></li>
+
+                                <?php } ?>
+
+                            </ul>
 
                     </ul>
 

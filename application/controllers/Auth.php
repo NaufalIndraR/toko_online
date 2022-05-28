@@ -1,6 +1,6 @@
 <?php
 
-class auth extends CI_Controller {
+class Auth extends CI_Controller {
 
         public function login()
         {
@@ -18,7 +18,9 @@ class auth extends CI_Controller {
             {
                 $this->session->set_flashdata('pesan','<div class="alert alert-danger alert-dismissible fade show" role="alert">
                 Username atau Password Anda Salah!
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
               </div>');
               redirect('auth/login');
             }else {
@@ -28,7 +30,7 @@ class auth extends CI_Controller {
                 switch($auth->role_id){
                     case 1 :    redirect('admin/dashboard_admin');
                                 break;
-                    case 2  :   redirect('dashboard');
+                    case 2  :   redirect('welcome');
                                 break;
                     default: break;
                     
@@ -36,5 +38,10 @@ class auth extends CI_Controller {
 
             }
         }
+    }
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('auth/login');
     }
 }
